@@ -1,6 +1,8 @@
 package Tests;
 
 import Helpers.Helper;
+import Utils.CommonMethods;
+import Utils.ConfigurationReader;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
@@ -111,4 +113,68 @@ public class Tests {
         Assert.assertEquals("check response code", 200, jsonPath.getInt("responseCode"));
         Assert.assertEquals("check message", "User exists!", jsonPath.getString("message"));
     }
+
+    @Test
+    public void LoginFunctionNegativeTest() {
+        Response response = Helper.verifyLoginFunctionNegative();
+
+        response.then().assertThat().statusCode(200);
+
+        JsonPath jsonPath = response.jsonPath();
+
+        Assert.assertEquals("check response code", 400, jsonPath.getInt("responseCode"));
+        Assert.assertEquals("check message", "Bad request, email or password parameter is missing in POST request.", jsonPath.getString("message"));
+    }
+
+    @Test
+    public void LoginFunctionTestWithDeleteMethod() {
+        Response response = Helper.verifyLoginFunctionWithDeleteMethod();
+
+        response.then().assertThat().statusCode(200);
+
+        JsonPath jsonPath = response.jsonPath();
+
+        Assert.assertEquals("check response code", 405, jsonPath.getInt("responseCode"));
+        Assert.assertEquals("check message", "This request method is not supported.", jsonPath.getString("message"));
+    }
+
+    @Test
+    public void CreateUserPositiveTest() {
+        Response response = Helper.createUser();
+
+        response.then().assertThat().statusCode(200);
+
+        JsonPath jsonPath = response.jsonPath();
+
+        Assert.assertEquals("check response code", 201, jsonPath.getInt("responseCode"));
+        Assert.assertEquals("check message", "User created!", jsonPath.getString("message"));
+    }
+
+    @Test
+    public void GetDetailsOfUserTest() {
+        Response response = Helper.getDetailsOfUser();
+
+        response.then().assertThat().statusCode(200);
+
+        JsonPath jsonPath = response.jsonPath();
+
+        Assert.assertEquals("check response code", 200, jsonPath.getInt("responseCode"));
+        Assert.assertEquals("check email", ConfigurationReader.get("email"), jsonPath.getString("user.email"));
+        Assert.assertEquals("check first name", Helper.firstName, jsonPath.getInt("user.first_name"));
+        Assert.assertEquals("check first name", Helper.lastName, jsonPath.getInt("user.last_name"));
+        Assert.assertEquals("check first name", Helper.companyName, jsonPath.getInt("user.company"));
+    }
+
+    @Test
+    public void deleteAccountTest() {
+        Response response = Helper.deleteAccount();
+
+        response.then().assertThat().statusCode(200);
+
+        JsonPath jsonPath = response.jsonPath();
+
+        Assert.assertEquals("check response code", 200, jsonPath.getInt("responseCode"));
+        Assert.assertEquals("check message", "Account deleted!", jsonPath.getString("message"));
+    }
+
 }
