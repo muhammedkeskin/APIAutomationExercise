@@ -11,4 +11,11 @@ public class Constants {
     public static final String CREATEACCOUNT = BASEURL+"/api/createAccount";
     public static final String DETAIL = BASEURL +"/api/getUserDetailByEmail";
     public static final String DELETEACCOUNT = BASEURL+"/api/deleteAccount";
+
+
+    public static final String SPARTANBASEURL = ConfigurationReader.get("spartanBaseUrl");
+    public static final String SPARTANSURL = SPARTANBASEURL + "/api/spartans";
+
 }
+
+//data-provider
