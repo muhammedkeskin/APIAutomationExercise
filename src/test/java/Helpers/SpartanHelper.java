@@ -42,6 +42,33 @@ public class SpartanHelper {
         return response;
     }
 
+    public static Response updateSpartanInfo(int spartanId, JSONObject payload) {
+        Response response = RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .and().pathParam("id", spartanId)
+                .and().body(payload)
+                .when()
+                .put(Constants.SPARTANSURL+"/{id}")
+                .then()
+                .extract().response();
+
+        return response;
+    }
+
+    public static Response partialUpdateSpartanInfo(int spartanId, JSONObject payload) {
+        Response response = RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .and().pathParam("id", spartanId)
+                .and().body(payload)
+                .when()
+                .patch(Constants.SPARTANSURL+"/{id}")
+                .then()
+                .extract().response();
+
+        return response;
+    }
+
+
 
 
 }

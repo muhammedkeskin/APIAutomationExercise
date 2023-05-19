@@ -28,7 +28,7 @@ public class SpartanTests {
 
         JSONObject requestBody = new JSONObject();
         requestBody.put("gender","Male");
-        requestBody.put("name","JohnDoe");
+        requestBody.put("name","created Name");
         requestBody.put("phone","01234567890");
 
         Response response = SpartanHelper.createSpartan(requestBody);
@@ -50,4 +50,33 @@ public class SpartanTests {
 
         response.then().assertThat().statusCode(200);
     }
+
+    @Order(4)
+    @Test
+    public void updateSpartanInfoTest() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("gender","Female");
+        requestBody.put("name","updated Name");
+        requestBody.put("phone","01234567890");
+
+        Response response = SpartanHelper.updateSpartanInfo(id, requestBody);
+
+        response.then().assertThat().statusCode(204);
+    }
+
+    @Order(5)
+    @Test
+    public void partialUpdateSpartanInfoTest() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("gender","Female");
+        requestBody.put("name","updated Name");
+
+        Response response = SpartanHelper.partialUpdateSpartanInfo(193, requestBody);
+
+        response.then().assertThat().statusCode(204);
+    }
+
+
 }
