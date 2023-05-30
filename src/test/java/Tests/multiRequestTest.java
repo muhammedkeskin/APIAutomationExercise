@@ -903,26 +903,26 @@ public class multiRequestTest {
 
     private static String token = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkY5QjA2M0IwRENENTk5OTJDNjdEMzIzOTlFNUY1MjZERTg4RUQzREMiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiItYkJqc056Vm1aTEdmVEk1bmw5U2JlaU8wOXcifQ.eyJuYmYiOjE2ODQ3ODU0MzksImV4cCI6MTY4NTY0OTQzOSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmV1My5wcmltZWFwcHMuaW8iLCJhdWQiOiJhcGkxIiwiY2xpZW50X2lkIjoicHJpbWVhcHBzX2FwcCIsInN1YiI6IjdmZmE1Y2JlLTE4ZjAtNDIyMC05ZDc3LWZjOGRhNThmNzcxYiIsImF1dGhfdGltZSI6MTY4NDc4NTQzNSwiaWRwIjoibG9jYWwiLCJuYW1lIjoiTWF6YXJzIFBvcnRhbCIsImdpdmVuX25hbWUiOiJNYXphcnMiLCJmYW1pbHlfbmFtZSI6IlBvcnRhbCIsImVtYWlsIjoicG9ydGFsQG1hemFyc2RlbmdlLmNvbS50ciIsImVtYWlsX3ZlcmlmaWVkIjoiZmFsc2UiLCJlbWFpbF9jb25maXJtZWQiOiJGYWxzZSIsImV4dGVybmFsX2xvZ2luIjoiZmFsc2UiLCJzY29wZSI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiLCJhcGkxIl0sImFtciI6WyJwd2QiXX0.Wae26CCkCv6C471N6UGxKUW7PL5S6f3LUGQIbCkyi5N_UFTAoLklwD60hMEYRkiWOufUQ-R8xtfGZAV2fGuelV2LuotuAaBWpj1ul5_3FOkt9zc-KAIl8dLzp2zQf5n8V18qln7BpQXx6Yu_SNNuB6ySiWSnD-zTvwTX5W5bAP9YonKW5lzvQ5CufMx-yaUzDBxYLGLRXqTpBEjqqfxJ1szXc9t73EYc6ymvR8NY8_vRNfV0wgyG9SwHybcTCcyDMj4a88mqnAyz8WnoaRTHD3xvjZrI1W898WyxnlctIWZifhSbKAIkTyEeyR7WkkXi6uE1721UKFsb2AQn7gSp";
 
-    public static Response get(String i) {
+    public static Response get(String id) {
 
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .headers("authority", "me.mazarsdenge.com.tr","accept", "application/json, text/javascript, */*; q=0.01", "Content-Type", "application/json", "x-client-id", "mazars", "x-requested-with", "XMLHttpRequest", "x-tenant-id", 18, "authorization", token)
                 .when()
-                .get("https://time.mazarsdenge.com.tr/api/bpm/get_workflow_instances/"+i)
+                .get("https://time.mazarsdenge.com.tr/api/bpm/get_workflow_instances/"+id)
                 .then()
                 .extract().response();
 
         return response;
     }
 
-    public static Response delete(String de) {
+    public static Response delete(String id) {
 
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .headers(Map.of("authority", "me.mazarsdenge.com.tr","accept", "application/json, text/javascript, */*; q=0.01", "Content-Type", "application/json", "x-client-id", "mazars", "x-requested-with", "XMLHttpRequest", "x-tenant-id", 18, "authorization", token))
                 .when()
-                .delete("https://time.mazarsdenge.com.tr/api/bpm/terminate_workflow/"+de)
+                .delete("https://time.mazarsdenge.com.tr/api/bpm/terminate_workflow/"+id)
                 .then()
                 .extract().response();
 
