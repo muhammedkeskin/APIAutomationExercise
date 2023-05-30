@@ -68,7 +68,28 @@ public class SpartanHelper {
         return response;
     }
 
+    public static Response getSpartansByQuery(String nC, String g) {
+        Response response = RestAssured.given().log().all()
+                .and().queryParam("nameContains",nC)
+                .queryParam("gender", g)
+                .when()
+                .get(Constants.SPARTANSEARCHURL)
+                .then()
+                .extract().response();
 
+        return response;
+    }
 
+    public static Response deleteSpartan(int id) {
+        Response response = RestAssured.given()
+                .baseUri(Constants.SPARTANSURL)
+                .and()
+                .pathParam("path", id)
+                .when()
+                .delete("/{path}")
+                .then()
+                .extract().response();
 
+        return  response;
+    }
 }

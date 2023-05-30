@@ -73,10 +73,29 @@ public class SpartanTests {
         requestBody.put("gender","Female");
         requestBody.put("name","updated Name");
 
-        Response response = SpartanHelper.partialUpdateSpartanInfo(193, requestBody);
+        Response response = SpartanHelper.partialUpdateSpartanInfo(id, requestBody);
 
         response.then().assertThat().statusCode(204);
     }
 
+    @Order(6)
+    @Test
+    public void getSpartansByQuery() {
+        String gender = "Male";
+        String nameContains = "Meade";
 
+        Response response = SpartanHelper.getSpartansByQuery(nameContains, gender);
+
+        response.then().assertThat().statusCode(200);
+
+        response.prettyPrint();
+    }
+
+    @Order(7)
+    @Test
+    public void deleteSpartan() {
+        Response response = SpartanHelper.deleteSpartan(id);
+
+        response.then().assertThat().statusCode(204);
+    }
 }

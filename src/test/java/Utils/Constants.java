@@ -15,6 +15,7 @@ public class Constants {
 
     public static final String SPARTANBASEURL = ConfigurationReader.get("spartanBaseUrl");
     public static final String SPARTANSURL = SPARTANBASEURL + "/api/spartans";
+    public static final String SPARTANSEARCHURL =  SPARTANBASEURL + "/api/spartans/search";
 
 }
 
